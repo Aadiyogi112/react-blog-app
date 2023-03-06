@@ -1,8 +1,22 @@
-import react from "react"
+import React from "react";
+import ReactDOM from "react-dom";
+// import "./index.css";
+import App from "./App";
 
+// REDUX
+import configureStore from "./redux/configureStore";
+import { Provider as ReduxProvider } from "react-redux";
 
-const App=()=>{
-    return <h1>FIRST JSX ELEMENT</h1>
-}
+const store = configureStore();
 
-export default App;
+const RootElement = () => {
+  return (
+    <ReduxProvider store={store}>
+      <React.StrictMode>
+          <App />
+      </React.StrictMode>
+    </ReduxProvider>
+  );
+};
+
+export default RootElement;
