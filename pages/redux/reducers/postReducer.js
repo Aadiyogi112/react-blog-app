@@ -1,13 +1,23 @@
-export default function counterReducer(state = [], action) {
+import * as ActionTypes from "../actions/actionTypes";
+
+export default function postsReducer(
+  state = {
+    isLoading: true,
+    errMsg: null,
+    posts: [],
+  },
+  action
+) {
   switch (action.type) {
-    case "INCREASE_COUNTER_BY_ONE":
-      return [...state, { ...(action.count + 1) }];
-    case "INCREASE_COUNTER_BY_TWO":
-      return [...state, { ...(action.count + 2) }];
-    case "DECREASE_COUNTER_BY_ONE":
-      return [...state, { ...(action.count - 1) }];
-    case "DECREASE_COUNTER_BY_TWO":
-      return [...state, { ...(action.count - 2) }];
+    case ActionTypes.GET_ALL_POST:
+      console.log("SUCCESS...");
+      return { ...state, isLoading: false, errMsg: null, post: action.payload };
+    case ActionTypes.GET_ALL_POST_LOADING:
+      console.log("LOADING....");
+      return { ...state, isLoading: true, errMsg: null, post: [] };
+    case ActionTypes.GET_ALL_POST_FAILED:
+      console.log("FAILED...");
+      return { ...state, isLoading: false, errMsg: action.payload, post: [] };
     default:
       return state;
   }
